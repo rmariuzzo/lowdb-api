@@ -1,0 +1,30 @@
+{
+  "name": "lowdb-api",
+  "description": "Small express middleware to interact with lowdb via a RESTful API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rmariuzzo/lowdb-api.git",
+  "author": "Rubens Mariuzzo <rubens@mariuzzo.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/rmariuzzo/lowdb-api",
+  "bugs": {
+    "url": "https://github.com/rmariuzzo/lowdb-api/issues"
+  },
+  "dependencies": {
+    "lodash-id": "^0.14.0",
+    "lowdb": "^1.0.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jest": "^21.2.1",
+    "supertest": "^3.0.0",
+    "tmp": "^0.0.33"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=6"
+  }
+}
