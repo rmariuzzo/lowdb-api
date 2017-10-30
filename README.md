@@ -1,6 +1,6 @@
 <div align=center>
 <h1>lowdb api</h1>
-<p>A small middleware to interact with [lowdb](https://github.com/typicode/lowdb) via a RESTful API</p>
+<p>A small middleware to interact with <a href="https://github.com/typicode/lowdb">lowdb</a> via a RESTful API</p>
 </div>
 
 ### Motivation
