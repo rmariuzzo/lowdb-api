@@ -69,7 +69,7 @@ function lowdbApi(file, options = {}) {
     // Remove the optional prefix from the path name.
     const uri = url.parse(req.url)
     let pathname = uri.pathname
-    if (options.prefix && pathname.indexOf(option.prefix) === 0) {
+    if (options.prefix && pathname.indexOf(options.prefix) === 0) {
       pathname = pathname.substr(0, options.prefix.length)
     }
 
