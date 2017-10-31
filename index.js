@@ -58,7 +58,7 @@ function lowdbApi(file, options = {}) {
   // Create the lowdb database instance.
   const Adapter = require(options.adapter || 'lowdb/adapters/FileSync')
   const db = lowdb(new Adapter(file))
-  db._.mixin(lodashId);
+  db._.mixin(lodashId)
 
   /**
    * Middleware function.
@@ -100,7 +100,11 @@ function lowdbApi(file, options = {}) {
         // Get a specific resource.
         if (segments.length === 2) {
           const item = get(db, collection, parsedId)
-          return res.status(200).send(item)
+          if (item) {
+            return res.status(200).send(item)
+          } else {
+            return notFound(res)
+          }
         }
 
       case 'POST':
@@ -145,37 +149,36 @@ function lowdbApi(file, options = {}) {
  */
 
 function all(db, key) {
-  return db.get(key).value();
+  return db.get(key, []).value()
 }
 
 function get(db, key, id) {
-  const parsedId = parseInt(id, 10);
-  if (isNaN(parsedId)) throw new Error('Not a number: ' + id);
-  return db.get(key).getById(parsedId).value();
+  return db.get(key).getById(id).value()
 }
 
 function insert(db, key, data) {
-  const lastInserted = db.get(key).maxBy('id').value();
-  const nextId = lastInserted ? lastInserted.id + 1 : 1;
-  data.id = nextId;
-  db.get(key).push(data).write();
-  return data;
+  db.defaults({ [key]: [] }).write()
+  const lastInserted = db.get(key).maxBy('id').value()
+  const nextId = lastInserted ? lastInserted.id + 1 : 1
+  data.id = nextId
+  db.get(key).push(data).write()
+  return data
 }
 
 function update(db, key, id, partial) {
-  db.get(key).updateById(id, partial).write();
+  db.get(key).updateById(id, partial).write()
   return get(db, key, id)
 }
 
 function remove(db, key, id) {
-  const data = get(db, key, id);
-  db.get(key).removeById(id).write();
-  return data;
+  const data = get(db, key, id)
+  db.get(key).removeById(id).write()
+  return data
 }
 
 function replace(db, key, id, data) {
-  db.get(key).replaceById(id, data).write();
-  return get(db, key, id);
+  db.get(key).replaceById(id, data).write()
+  return get(db, key, id)
 }
 
 /**

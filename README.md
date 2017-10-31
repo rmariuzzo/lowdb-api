@@ -32,5 +32,3 @@ app.use(lowdbApi(file))
  1. `yarn`
  2. `yarn test` or `yarn test -- --watch`
 
-
-
