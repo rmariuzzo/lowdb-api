@@ -29,7 +29,7 @@ const bodyParser = require('body-parser')
 const lowdbApi = require('lowdb-api')
 
 const app = express()
-const file = path(__dirname, './db.json')
+const file = path.join(__dirname, './db.json')
 const options = {}
 
 app.use(bodyParser.json())
