@@ -1,6 +1,11 @@
 {
   "name": "lowdb-api",
-  "description": "Small express middleware to interact with lowdb via a RESTful API",
+  "description": "lowdb-api is an Express middleware that interpret all requests as a real RESTful API.",
+  "keywords": [
+    "lowdb",
+    "restful-api",
+    "development-environment"
+  ],
   "version": "1.0.2",
   "main": "index.js",
   "repository": "git@github.com:rmariuzzo/lowdb-api.git",
