@@ -6,7 +6,7 @@
     "restful-api",
     "development-environment"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "git@github.com:rmariuzzo/lowdb-api.git",
   "author": "Rubens Mariuzzo <rubens@mariuzzo.com>",
