@@ -148,37 +148,41 @@ function lowdbApi(file, options = {}) {
  * @private
  */
 
+const defaultResource = {
+  data: [],
+  metadata: {}
+}
+
 function all(db, key) {
-  return db.get(key, []).value()
+  return db.get(`${key}.data`, []).value()
 }
 
 function get(db, key, id) {
-  return db.get(key).getById(id).value()
+  return db.get(`${key}.data`).getById(id).value()
 }
 
 function insert(db, key, data) {
-  db.defaults({ [key]: [] }).write()
-  const lastInserted = db.get(key).maxBy('id').value()
-  const nextId = lastInserted ? lastInserted.id + 1 : 1
-  data.id = nextId
-  db.get(key).push(data).write()
+  // Ensure a resource entry exist for the given key.
+  db.defaults({ [key]: defaultResource }).write()
+
+  // Generate the next id.
+  if (typeof data.id === 'undefined') {
+    const lastId = db.get(`${key}.metadata.lastId`, 0).value()
+    data.id = lastId + 1
+    db.set(`${key}.metadata.lastId`, data.id).write()
+  }
+
+  db.get(`${key}.data`).push(data).write()
   return data
 }
 
 function update(db, key, id, partial) {
-  db.get(key).updateById(id, partial).write()
+  db.get(`${key}.data`).updateById(id, partial).write()
   return get(db, key, id)
 }
 
 function remove(db, key, id) {
-  const data = get(db, key, id)
-  db.get(key).removeById(id).write()
-  return data
-}
-
-function replace(db, key, id, data) {
-  db.get(key).replaceById(id, data).write()
-  return get(db, key, id)
+  return db.get(`${key}.data`).removeById(id).write()
 }
 
 /**

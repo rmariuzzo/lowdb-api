@@ -43,6 +43,15 @@ describe('lowdb api middleware', () => {
       .then(done)
   })
 
+  it('should insert a new resource with a given id', (done) => {
+    request(server)
+      .post('/users')
+      .send({ id: 50, name: 'test' })
+      .expect(201)
+      .then((res) => expect(res.body).toHaveProperty('id', 50))
+      .then(done)
+  })
+
   it('should update an existing resource', (done) => {
     request(server)
       .put('/users/1')

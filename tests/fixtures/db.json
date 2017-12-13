@@ -1,12 +1,17 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "Rubens Mariuzzo"
+  "users": {
+    "metadata": {
+      "lastId": 2
     },
-    {
-      "id": 2,
-      "name": "Mishell Mariuzzo"
-    }
-  ]
+    "data": [
+      {
+        "id": 1,
+        "name": "Rubens Mariuzzo"
+      },
+      {
+        "id": 2,
+        "name": "Mishell Mariuzzo"
+      }
+    ]
+  }
 }
